@@ -157,11 +157,12 @@ plugins: [
 此时关于`webpack`配置`vue`就已经可以正常使用了，先执行`yarn start`，页面能正常先，则配置没有大问题，那么就可以删除项目`src`文件夹下现有的这些文件，并新建`vue`的项目文件进行测试及正常开发了。
 
 这里先删除不需要的文件，然后可以先通过`@vue/cli`创建一个初始化的`vue`项目，然后将该项目的代码全部复制过来，不用管它的配置问题，我们需要的是：
-1. 入口文件`main.js`的代码（复制并覆盖`src/idnex.js`文件中的代码）
-2. 模板文件`public/index.html`的代码（复制并覆盖`src/index.html`文件中的代码，删除头部引用图标`icon`的相关代码）
+1. 入口文件`main.js`的代码（复制并覆盖`src/idnex.js`文件中的代码，并将`src/index.js`文件名修改为`src/main.js`）
+2. 模板文件`public/index.html`的代码（复制并覆盖`src/index.html`文件中的代码，删除头部引用图标`icon`的相关代码，然后将该文件移到根目录下）
 3. 组件`components/HelloWorld.vue`文件
 4. `src/App.vue`文件（修改图片引用路径）
 5. 他们的`logo`（`logo`图片放到`src/assets/images`中）
+6. 修改`webpack`配置中关于上述修改的入口文件名`src/main.js`，以及模板文件路径`index.html`
 
 然后运行`yarn start`，此时终端会报一堆的`eslint`检测出的语法错误，修改这些语法错误后，`vue`初始化项目就被拷贝过来了，也能在浏览器中正常显示。
 

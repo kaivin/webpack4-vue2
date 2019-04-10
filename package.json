@@ -20,7 +20,8 @@
   "author": "kevin",
   "license": "ISC",
   "dependencies": {
-    "core-js": "^3.0.1",
+    "core-js": "2.6.5",
+    "element-ui": "^2.7.2",
     "jquery": "2.x",
     "vue": "^2.6.10",
     "vue-router": "^3.0.2"
@@ -37,6 +38,7 @@
     "autoprefixer": "^9.4.10",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "babel-plugin-component": "^1.1.1",
     "chalk": "^2.4.2",
     "clean-webpack-plugin": "^2.0.0",
     "copy-webpack-plugin": "^5.0.1",

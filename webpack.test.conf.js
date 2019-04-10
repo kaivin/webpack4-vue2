@@ -15,7 +15,7 @@ const favicon = path.resolve(process.cwd(), 'src/favicon.ico')
 
 module.exports={
     entry:{
-        app:[path.resolve(__dirname, 'src/index.js')],
+        app:[path.resolve(__dirname, 'src/main.js')],
         superSlide: [path.resolve(__dirname, 'src/assets/js/jquery.SuperSlide.2.1.1.js')],
     },
     output:{
@@ -221,7 +221,7 @@ module.exports={
         new webpack.HashedModuleIdsPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',//输出文件的名称
-            template: path.resolve(__dirname, 'src/index.html'),//模板文件的路径
+            template: path.resolve(__dirname, 'index.html'),//模板文件的路径
             title:'webpack4.x',//配置生成页面的标题
             favicon,
             appVersion
