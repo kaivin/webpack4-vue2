@@ -44,7 +44,8 @@ module.exports = {
     "no-console": ["error",{allow:["log","warn"]}],// 允许使用console.log()
     "arrow-parens": 0,
     //"no-undef":0,// 关闭全局变量检测
-    "no-new":0//允许使用 new 关键字
+    "no-new":0,//允许使用 new 关键字
+    "no-useless-escape":0 // 不检测转义字符是否多余
   },
   globals:{// 允许全局变量,将$设置为true，表示允许使用全局变量$
     "document": true,

@@ -159,7 +159,3 @@ Vue.use(Button);
 <el-button type="primary">主要按钮</el-button>
 ```
 运行`yarn start`，按钮可以正常显示。查看`Button`组件的`size`属性，可看到其有三种值供选择：`medium / small / mini`，这里可以修改全局配置的`size`参数值查看具体按钮变化。
-
-# 国际化
-
-# 自定义主题

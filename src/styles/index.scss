@@ -1,0 +1,31 @@
+
+@charset "UTF-8";
+
+// 导入core中的基础文件
+//-----------------------------------------------------
+@import "core/settings";
+@import "core/mixin";
+@import "core/reset";
+@import "iconfonts";
+@import "transitions";
+html,body,#app,#app > .el-container{
+  margin:0;
+  padding:0;
+  height:100vh;
+  overflow: hidden;
+}
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+}
+.page-root{
+  width:100%;
+  height:100%;
+  overflow: hidden;
+}
+
+

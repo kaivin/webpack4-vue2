@@ -196,7 +196,7 @@ module.exports={
                 },
                 superSlide: {
                     chunks:'all',
-                    test: /[\\/]src[\\/]assets[\\/]js[\\/]/,
+                    test: /[\\/]src[\\/]vendor[\\/]/,
                     name: 'superSlide',
                     priority: 1,
                     enforce: true,

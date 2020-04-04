@@ -16,7 +16,6 @@ const favicon = path.resolve(process.cwd(), 'src/favicon.ico')
 module.exports={
     entry:{
         app:[path.resolve(__dirname, 'src/main.js')],
-        superSlide: [path.resolve(__dirname, 'src/assets/js/jquery.SuperSlide.2.1.1.js')],
     },
     output:{
         path:path.resolve(__dirname,'test'),
@@ -198,7 +197,7 @@ module.exports={
                 },
                 superSlide: {
                     chunks:'all',
-                    test: /[\\/]src[\\/]assets[\\/]js[\\/]/,
+                    test: /[\\/]src[\\/]vendor[\\/]/,
                     name: 'superSlide',
                     priority: 1,
                     enforce: true,

@@ -77,7 +77,7 @@ module.exports={
                     }
                 }],
                 enforce: "pre", // 编译前检查
-                exclude: [/node_modules/,path.resolve(__dirname, 'src/assets/js/jquery.SuperSlide.2.1.1.js')], // 不检测的文件
+                exclude: [/node_modules/,path.resolve(__dirname, 'src/vendor/jquery.SuperSlide.2.1.1.js')], // 不检测的文件
                 include: [path.resolve(__dirname, 'src')], // 指定检查的目录
             },
             {
@@ -124,6 +124,15 @@ module.exports={
                     {
                         loader: 'sass-loader', 
                         options: { sourceMap: true }
+                    },
+                    { loader: 'sass-resources-loader',
+                        options: {
+                            sourceMap: true,
+                            resources: [
+                                path.resolve(__dirname, 'src/styles/core/_settings.scss'),
+                                path.resolve(__dirname, 'src/styles/core/_mixin.scss'),
+                            ]
+                        }
                     }
                 ],
                 exclude: /node_modules/
