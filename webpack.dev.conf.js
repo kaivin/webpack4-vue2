@@ -8,6 +8,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const notifier = require('node-notifier');
 const { VueLoaderPlugin } = require('vue-loader');
 const postcss = require('./postcss.config');
+const config = require('./config');
 
 // 版本号
 const appVersion = new Date().getTime()
@@ -280,6 +281,7 @@ module.exports={
         host: ip,
         overlay:true,
         hot:true,
+        proxy:config.dev.proxyTable,
         inline:true,
         after() {
             open(`http://${ip}:${this.port}`)

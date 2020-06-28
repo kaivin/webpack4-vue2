@@ -13,6 +13,7 @@
         "corejs": 2
       }]
     ],
+    "sourceType": "unambiguous",
     "plugins": [
       ["@babel/plugin-transform-runtime",{
         "corejs": 2

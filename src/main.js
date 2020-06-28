@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import router from './router';
+import { getToken } from '@/utils/token';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
 import '@/styles/index.scss'; // global css
 import 'animate.css';
 
@@ -14,8 +14,11 @@ Vue.config.productionTip = false;
 
 const whiteList = ['/login']; // 不需要登录就可以显示的页面白名单
 
+// if (process.env.NODE_ENV === 'development') {
+//     require('./mock');
+// }
 router.beforeEach((to, from, next) => {
-    const hasToken = false;// 预设一个假的token
+    const hasToken = getToken();// 获取cookie存储的token
     if(hasToken){// token存在
         if(to.path === '/login'){
             next({path:'/'});// token存在并且打开的是登录页，那么直接跳转到默认页
