@@ -7,8 +7,12 @@ const env = process.env.NODE_ENV;// node通过process.env获取用户执行命�
 
 const http = axios.create({
     baseURL: env=="development"?configAPI.dev.env.BASE_API: configAPI.build.env.BASE_API,// 判断值是哪个，确定请求的baseURL是哪个环境的
-    //withCredentials: true, //前端配置了这个withCredentials=true，后段设置Access-Control-Allow-Origin不能为 " * ",必须是前端的源地址（也就是前端开发过程中项目跑起来的ip:端口号）
+    withCredentials: false, //前端配置了这个withCredentials=true，后段设置Access-Control-Allow-Origin不能为 " * ",必须是前端的源地址（也就是前端开发过程中项目跑起来的ip:端口号）
     timeout: 20000,
+    // headers:{
+    //     'Content-Type':'application/x-www-form-urlencoded;charset=utf-8',
+    //     "Access-Control-Allow-Origin":"*"
+    // },
 });
 // token的时效性问题，这里需要使用axios的拦截器功能
 // axios 请求拦截

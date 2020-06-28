@@ -33,7 +33,7 @@ const actions = {
     login({ commit }, userInfo) {
         const { username, password } = userInfo;
         return new Promise((resolve, reject) => {
-            login({ username: username.trim(), password: password }).then(response => {// 字段名根据后端而定
+            login({ user_name: username.trim(), password: password }).then(response => {// 字段名根据后端而定
                 const { data } = response;
                 commit('SET_TOKEN', data.token);// 字段根据后端返回而定
                 setToken(data.token);// 设置token,字段根据后端返回而定

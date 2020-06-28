@@ -10,8 +10,8 @@ module.exports = {
         port: port,
         proxyTable:{
             '/api':{
-                target:`http://www.api.com/api`,
-                //changeOrigin: true, 
+                target:`http://www.api.com`,
+                changeOrigin: true, 
                 pathRewrite:{
                     '^/api':'', 
                 }
