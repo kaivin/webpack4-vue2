@@ -1,9 +1,10 @@
 <template>
-  <el-container>
-    <sidebar />
+  <el-container class="is-vertical">
+    <header-module />
     <el-container>
+      <sidebar />
+      <el-container>
       <el-header>
-        <header-module />
         <tags-view />
       </el-header>
       <el-main>
@@ -15,6 +16,7 @@
           </keep-alive>
         </transition>
       </el-main>
+      </el-container>
     </el-container>
   </el-container>
 </template>

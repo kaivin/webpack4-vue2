@@ -29,18 +29,18 @@ module.exports={
     // 加载器 loader 配置项
     module:{
         rules:[
-            {
-                test: require.resolve('jquery'),
-                use: [
-                    {
-                    loader: 'expose-loader',
-                    options: 'jQuery'
-                },
-                {
-                    loader: 'expose-loader',
-                    options: '$'
-                }]
-            },
+            // {
+            //     test: require.resolve('jquery'),
+            //     use: [
+            //         {
+            //         loader: 'expose-loader',
+            //         options: 'jQuery'
+            //     },
+            //     {
+            //         loader: 'expose-loader',
+            //         options: '$'
+            //     }]
+            // },
             {
                 test: /\.vue$/,
                 use:[
@@ -188,17 +188,9 @@ module.exports={
             cacheGroups: {
                 dll: {
                     chunks:'all',
-                    test: /[\\/]node_modules[\\/](jquery|core-js|vue|vue-router)[\\/]/,
+                    test: /[\\/]node_modules[\\/](core-js|vue|vue-router)[\\/]/,
                     name: 'dll',
                     priority: 2,
-                    enforce: true,
-                    reuseExistingChunk: true
-                },
-                superSlide: {
-                    chunks:'all',
-                    test: /[\\/]src[\\/]vendor[\\/]/,
-                    name: 'superSlide',
-                    priority: 1,
                     enforce: true,
                     reuseExistingChunk: true
                 },

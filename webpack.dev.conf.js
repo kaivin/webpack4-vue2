@@ -31,18 +31,18 @@ module.exports={
     // 加载器 loader 配置项
     module:{
         rules:[
-            {
-                test: require.resolve('jquery'),
-                use: [
-                    {
-                    loader: 'expose-loader',
-                    options: 'jQuery'
-                },
-                {
-                    loader: 'expose-loader',
-                    options: '$'
-                }]
-            },
+            // {
+            //     test: require.resolve('jquery'),
+            //     use: [
+            //         {
+            //         loader: 'expose-loader',
+            //         options: 'jQuery'
+            //     },
+            //     {
+            //         loader: 'expose-loader',
+            //         options: '$'
+            //     }]
+            // },
             {
                 test: /\.vue$/,
                 use:[
@@ -172,7 +172,7 @@ module.exports={
                         loader: 'url-loader',
                         options: {
                             limit: 8192,        // 小于8192字节的图片打包成base 64图片
-                            name:'images/[name].[hash:8].[ext]',
+                            name:'images/[name].[ext]',
                             publicPath:''
                         }
                     },

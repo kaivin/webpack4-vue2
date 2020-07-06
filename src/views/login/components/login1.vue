@@ -1,6 +1,6 @@
 <template>
     <el-form v-bind:model="loginForm" v-bind:rules="rules" ref="loginForm" class="login-form">
-        <div class="login-title">中台前端管理登录</div>
+        <div class="login-title">红星机器工作台</div>
         <el-form-item prop="username">
             <el-input 
                 v-model="loginForm.username" 
@@ -121,7 +121,15 @@ export default {
             $this.$refs[formName].validate(valid => {
                 if (valid) {
                     $this.$store.dispatch('user/login', $this.loginForm).then(() => {
-                        $this.$router.push({ path: $this.redirect || '/' })
+                        if($this.$store.state.user.token){
+                            $this.$store.dispatch('user/getInfo', $this.$store.state.user.token).then(() => {
+                                $this.$router.push({ path: $this.redirect || '/' })
+                                // $this.loading = false
+                            }).catch((error) => {
+                                console.log(error);
+                                // $this.loading = false
+                            });
+                        }
                         // $this.loading = false
                     }).catch((error) => {
                         console.log(error);
