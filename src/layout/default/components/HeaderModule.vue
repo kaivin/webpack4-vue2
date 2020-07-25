@@ -12,11 +12,11 @@
         </div>
         <div class="nav-right">
             <div class="item-nav"><a href="javascript:void(0);">消息</a></div>
-            <div class="item-nav"><a href="javascript:void(0);">{{name}}</a></div>
+            <div class="item-nav"><a href="javascript:void(0);">{{info.name}}</a></div>
             <div class="item-nav">
-                <a href="javascript:void(0);" class="user"><img v-bind:src="avatars" alt=""></a>
+                <a href="javascript:void(0);" class="user"><img v-bind:src="info.avatars" alt=""></a>
                 <div class="user-panel">
-                    <div class="user-header"><img v-bind:src="avatars" alt=""><span>{{name}}</span></div>
+                    <div class="user-header"><img v-bind:src="info.avatars" alt=""><span>{{info.name}}</span></div>
                     <div class="user-body">
                         <div class="item-link"><a href="">账号设置</a></div>
                     </div>
@@ -34,9 +34,20 @@ export default {
     computed:{
         ...mapGetters([
             'token',
-            'name',
-            'avatars',
+            'info'
         ]),
+    },
+    beforeCreate(){
+        var $this = this;
+        if(sessionStorage.getItem('Access-Token')) {
+            $this.$store.dispatch('user/getInfo', sessionStorage.getItem('Access-Token')).then(() => {
+                // $this.$router.push({ path: $this.redirect || '/' })
+                // $this.loading = false
+            }).catch((error) => {
+                console.log(error);
+                // $this.loading = false
+            });
+        }
     },
     methods:{
         logout(){

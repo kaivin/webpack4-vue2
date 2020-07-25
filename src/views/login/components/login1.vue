@@ -31,6 +31,7 @@
     </el-form>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import { isEmpty } from '@/utils/validate';
 export default {
     name:'LoginFormModule',
@@ -69,6 +70,11 @@ export default {
             capsTooltip:false,
         }
     },
+    computed:{
+        ...mapGetters([
+            'info'
+        ]),
+    },
     mounted(){
         var $this = this;
         if(isEmpty($this.loginForm.username)){
@@ -95,7 +101,7 @@ export default {
         checkeUsername(username){
             var str=username;
             //在JavaScript中，正则表达式只能使用"/"开头和结束，不能使用双引号
-            var Expression=/^(\w){3,10}$/; 
+            var Expression=/^(\w){3,20}$/; 
             var objExp=new RegExp(Expression);          //创建正则表达式对象
             if(objExp.test(str)==true){                   //通过正则表达式验证
                 return true;
@@ -121,15 +127,19 @@ export default {
             $this.$refs[formName].validate(valid => {
                 if (valid) {
                     $this.$store.dispatch('user/login', $this.loginForm).then(() => {
-                        if($this.$store.state.user.token){
-                            $this.$store.dispatch('user/getInfo', $this.$store.state.user.token).then(() => {
+                        $this.$store.dispatch('user/getInfo', $this.$store.state.user.token).then(() => {
+                            $this.$store.dispatch('user/getMenuData', $this.$store.state.user.token).then(() => {
                                 $this.$router.push({ path: $this.redirect || '/' })
                                 // $this.loading = false
                             }).catch((error) => {
                                 console.log(error);
                                 // $this.loading = false
                             });
-                        }
+                            // $this.loading = false
+                        }).catch((error) => {
+                            console.log(error);
+                            // $this.loading = false
+                        });
                         // $this.loading = false
                     }).catch((error) => {
                         console.log(error);

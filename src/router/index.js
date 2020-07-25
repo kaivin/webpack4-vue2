@@ -15,11 +15,11 @@ const routes = [
     },
     {
         path: '/',
-        redirect: 'helloWorld',
+        redirect: '/helloWorld',
         component: Layout,
         children: [
             {
-                path: 'helloWorld',
+                path: '/helloWorld',
                 component: () => import('@/views/helloWorld'),
                 name: 'HelloWorld',
             },
