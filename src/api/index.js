@@ -44,7 +44,7 @@ http.interceptors.response.use(
         const res = response.data;
         console.log(res,"响应拦截");
         // 定时刷新access-token
-        if (response.data.code<0) {//这里需要看后端返回的是什么，以及后端返回的数据结构做调整
+        if (response.data.code==9001) {//这里需要看后端返回的是什么，以及后端返回的数据结构做调整
             // 刷新token
             store.dispatch('user/resetToken').then(() => {
                 location.reload();

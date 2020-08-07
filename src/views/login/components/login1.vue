@@ -72,7 +72,7 @@ export default {
     },
     computed:{
         ...mapGetters([
-            'info'
+            'loginInfo'
         ]),
     },
     mounted(){
@@ -127,19 +127,12 @@ export default {
             $this.$refs[formName].validate(valid => {
                 if (valid) {
                     $this.$store.dispatch('user/login', $this.loginForm).then(() => {
-                        $this.$store.dispatch('user/getInfo', $this.$store.state.user.token).then(() => {
-                            $this.$store.dispatch('user/getMenuData', $this.$store.state.user.token).then(() => {
-                                $this.$router.push({ path: $this.redirect || '/' })
-                                // $this.loading = false
-                            }).catch((error) => {
-                                console.log(error);
-                                // $this.loading = false
-                            });
-                            // $this.loading = false
-                        }).catch((error) => {
-                            console.log(error);
-                            // $this.loading = false
-                        });
+                        console.log($this.loginInfo,999);
+                        if($this.loginInfo.code==200){
+                            this.$router.push({ path: $this.redirect || '/' });
+                        }else{
+                            $this.$message.error($this.loginInfo.msg);
+                        }
                         // $this.loading = false
                     }).catch((error) => {
                         console.log(error);

@@ -3,20 +3,16 @@
         <div class="nav-left">
             <div class="logo"><router-link to="/"><strong><i></i><i></i><i></i><i></i></strong><span>红星机器工作台</span></router-link></div>
             <ul class="cate-list">
-                <li class="active"><span>OA系统</span></li>
-                <li><span>站点后台</span></li>
-                <li><span>询盘系统</span></li>
-                <li><span>数据分析</span></li>
-                <li><span>权限设置</span></li>
+                <li v-for="item in menuList" v-bind:key="item.id" v-bind:class="item.isOn?'active':''" v-on:click="menuClick(item.id)"><span>{{item.name}}</span></li>
             </ul>
         </div>
         <div class="nav-right">
             <div class="item-nav"><a href="javascript:void(0);">消息</a></div>
-            <div class="item-nav"><a href="javascript:void(0);">{{info.name}}</a></div>
+            <div class="item-nav"><a href="javascript:void(0);">{{userInfo.name}}</a></div>
             <div class="item-nav">
-                <a href="javascript:void(0);" class="user"><img v-bind:src="info.avatars" alt=""></a>
+                <a href="javascript:void(0);" class="user"><img v-bind:src="userInfo.avatars" alt=""></a>
                 <div class="user-panel">
-                    <div class="user-header"><img v-bind:src="info.avatars" alt=""><span>{{info.name}}</span></div>
+                    <div class="user-header"><img v-bind:src="userInfo.avatars" alt=""><span>{{userInfo.name}}</span></div>
                     <div class="user-body">
                         <div class="item-link"><a href="">账号设置</a></div>
                     </div>
@@ -28,36 +24,62 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 export default {
     name:"HeaderModule",
-    computed:{
-        ...mapGetters([
-            'token',
-            'info'
-        ]),
+    data(){
+        return{
+        }
     },
-    beforeCreate(){
-        var $this = this;
-        if(sessionStorage.getItem('Access-Token')) {
-            $this.$store.dispatch('user/getInfo', sessionStorage.getItem('Access-Token')).then(() => {
-                // $this.$router.push({ path: $this.redirect || '/' })
+    computed:{
+        userInfo(){
+            if(this.$store.getters.userData.data){
+                return this.$store.getters.userData.data;
+            }else{
+                return {};
+            }
+        },
+        menuList(){
+            var $this = this;
+            var menuInfo = [];
+            var menuData = $this.$store.getters.menuData;
+            if(menuData.length>0){
+                menuData.forEach(function(item,index){
+                    if(item.pid==0){
+                        menuInfo.push(item);
+                    }
+                });
+                menuInfo.forEach(function(item,index){
+                    if(index==0){
+                        item.isOn=true;
+                    }else{
+                        item.isOn =false;
+                    }
+                });
+            }
+            return menuInfo
+        }
+    },
+    methods:{
+        // 退出登录
+        logout(){
+            var $this = this;
+            $this.$store.dispatch('user/logout').then(() => {
+                $this.$router.push({ path: '/login' })
                 // $this.loading = false
             }).catch((error) => {
                 console.log(error);
                 // $this.loading = false
             });
-        }
-    },
-    methods:{
-        logout(){
+        },
+        // 菜单点击事件
+        menuClick(id){
             var $this = this;
-            $this.$store.dispatch('user/logout', $this.token).then(() => {
-                $this.$router.push({ path: '/' })
-                // $this.loading = false
-            }).catch((error) => {
-                console.log(error);
-                // $this.loading = false
+            $this.menuList.forEach(function(item){
+                if(item.id==id){
+                    $this.$set(item,'isOn',true);
+                }else{
+                    $this.$set(item,'isOn',false);
+                }
             });
         }
     }
@@ -157,7 +179,7 @@ export default {
     .cate-list{
         float:left;
         overflow: hidden;
-        margin-left: 20px;
+        margin-left: 30px;
         li{
             float:left;
             span{

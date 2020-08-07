@@ -1,9 +1,8 @@
 import request from './index';
 
-export function getMenuData(token) {
+export function getMenuData() {
     return request({
         url: '/api/menu/show',
         method: 'get',
-        params: token
     });
 }

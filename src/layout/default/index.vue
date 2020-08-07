@@ -22,7 +22,6 @@
 </template>
 
 <script>
-
 import { Sidebar, HeaderModule,TagsView } from './components';
 export default {
   name: 'Layout',
@@ -37,7 +36,16 @@ export default {
     },
     key() {
       return this.$route.fullPath
-    }
+    },
+  },
+  beforeCreate:function(){
+      var $this = this;
+      $this.$store.dispatch('user/getInfo').then(res=>{
+          console.log($this.$store.getters.userData,"用户");
+      });
+      $this.$store.dispatch('menu/getMenuData').then(res=>{
+          console.log($this.$store.getters.menuData,"菜单");
+      });
   },
   methods: {
   }
