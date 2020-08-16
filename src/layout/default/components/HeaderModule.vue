@@ -3,7 +3,7 @@
         <div class="nav-left">
             <div class="logo"><router-link to="/"><strong><i></i><i></i><i></i><i></i></strong><span>红星机器工作台</span></router-link></div>
             <ul class="cate-list">
-                <li v-for="item in menuList" v-bind:key="item.id" v-bind:class="item.isOn?'active':''" v-on:click="menuClick(item.id)"><span>{{item.name}}</span></li>
+                <li v-for="item in rootMenu" v-bind:key="item.id" v-bind:class="item.isOn?'active':''" v-on:click="menuClick(item.id)"><span>{{item.name}}</span></li>
             </ul>
         </div>
         <div class="nav-right">
@@ -30,6 +30,7 @@ export default {
         return{
         }
     },
+    props:["rootMenu"],
     computed:{
         userInfo(){
             if(this.$store.getters.userData.data){
@@ -38,26 +39,26 @@ export default {
                 return {};
             }
         },
-        menuList(){
-            var $this = this;
-            var menuInfo = [];
-            var menuData = $this.$store.getters.menuData;
-            if(menuData.length>0){
-                menuData.forEach(function(item,index){
-                    if(item.pid==0){
-                        menuInfo.push(item);
-                    }
-                });
-                menuInfo.forEach(function(item,index){
-                    if(index==0){
-                        item.isOn=true;
-                    }else{
-                        item.isOn =false;
-                    }
-                });
-            }
-            return menuInfo
-        }
+        // menuList(){
+        //     var $this = this;
+        //     var menuInfo = [];
+        //     var menuData = $this.$store.getters.menuData;
+        //     if(menuData.length>0){
+        //         menuData.forEach(function(item,index){
+        //             if(item.pid==0){
+        //                 menuInfo.push(item);
+        //             }
+        //         });
+        //         menuInfo.forEach(function(item,index){
+        //             if(index==0){
+        //                 item.isOn=true;
+        //             }else{
+        //                 item.isOn =false;
+        //             }
+        //         });
+        //     }
+        //     return menuInfo
+        // }
     },
     methods:{
         // 退出登录
@@ -74,13 +75,8 @@ export default {
         // 菜单点击事件
         menuClick(id){
             var $this = this;
-            $this.menuList.forEach(function(item){
-                if(item.id==id){
-                    $this.$set(item,'isOn',true);
-                }else{
-                    $this.$set(item,'isOn',false);
-                }
-            });
+            $this.$emit("update",id);
+            $this.$forceUpdate();
         }
     }
 }
